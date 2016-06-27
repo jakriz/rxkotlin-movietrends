@@ -1,6 +1,7 @@
 package io.github.jakriz.movietrends.service.client
 
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.rx.rx_string
 import org.springframework.stereotype.Service
 import rx.Observable
 
@@ -8,8 +9,7 @@ import rx.Observable
 class FuelHttpClient : HttpClient {
 
     override fun get(url: String): Observable<String> {
-        val (request, response, result) = Fuel.get(url).response()
-        return if (response.httpStatusCode == 200) String(response.data) else null
+        return Fuel.get(url).rx_string()
     }
 
 }

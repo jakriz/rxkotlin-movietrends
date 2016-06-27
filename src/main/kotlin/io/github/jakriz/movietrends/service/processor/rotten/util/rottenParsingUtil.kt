@@ -1,4 +1,4 @@
-package io.github.jakriz.movietrends.service.rotten.util
+package io.github.jakriz.movietrends.service.processor.rotten.util
 
 fun ratingFromPercentageText(text: String?): Double? {
     text?.let {

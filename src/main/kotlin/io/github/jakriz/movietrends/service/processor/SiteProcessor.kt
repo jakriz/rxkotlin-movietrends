@@ -1,4 +1,4 @@
-package io.github.jakriz.movietrends.service
+package io.github.jakriz.movietrends.service.processor
 
 import io.github.jakriz.movietrends.model.MovieInfo
 

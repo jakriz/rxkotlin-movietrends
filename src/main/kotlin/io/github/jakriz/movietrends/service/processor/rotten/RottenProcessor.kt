@@ -1,9 +1,10 @@
-package io.github.jakriz.movietrends.service.rotten
+package io.github.jakriz.movietrends.service.processor.rotten
 
 import io.github.jakriz.movietrends.model.MovieInfo
 import io.github.jakriz.movietrends.model.Role
-import io.github.jakriz.movietrends.service.SiteProcessor
-import io.github.jakriz.movietrends.service.rotten.util.ratingFromPercentageText
+import io.github.jakriz.movietrends.service.processor.SiteProcessor
+import io.github.jakriz.movietrends.service.processor.rotten.util.ratingFromPercentageText
+import io.github.jakriz.movietrends.service.processor.rotten.util.ratingFromPercentageText
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.stereotype.Service
