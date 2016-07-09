@@ -18,7 +18,7 @@ class TrendsController @Autowired constructor(val infoComposer: InfoComposer,
                                               val siteProcessors: List<SiteProcessor>) {
 
     @RequestMapping("/trends/{name}")
-    fun getInfo(@PathVariable name: String, response: HttpServletResponse): DeferredResult<List<SiteInfo>> {
+    fun getInfo(@PathVariable name: String): DeferredResult<List<SiteInfo>> {
         val deferred = DeferredResult<List<SiteInfo>>();
 
         Observable.merge(siteProcessors.map {
