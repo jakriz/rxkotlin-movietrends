@@ -1,6 +1,7 @@
 package io.github.jakriz.movietrends.service.processor
 
 import io.github.jakriz.movietrends.model.MovieInfo
+import io.github.jakriz.movietrends.model.Role
 
 interface SiteProcessor {
 
@@ -8,5 +9,5 @@ interface SiteProcessor {
 
     fun urlForName(name: String): String
 
-    fun parseToMovieInfos(html: String): List<MovieInfo>
+    fun parseToMovieInfos(html: String, allowedRoles: Set<Role>?): List<MovieInfo>
 }
