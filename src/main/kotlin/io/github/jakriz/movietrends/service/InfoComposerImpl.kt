@@ -2,7 +2,6 @@ package io.github.jakriz.movietrends.service
 
 import io.github.jakriz.movietrends.service.client.HttpClient
 import io.github.jakriz.movietrends.model.SiteInfo
-import io.github.jakriz.movietrends.model.TrendInfo
 import io.github.jakriz.movietrends.service.calc.TrendCalculator
 import io.github.jakriz.movietrends.service.processor.SiteProcessor
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,6 +1,5 @@
 package io.github.jakriz.movietrends.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import io.github.jakriz.movietrends.model.SiteInfo
 import io.github.jakriz.movietrends.service.InfoComposer
 import io.github.jakriz.movietrends.service.processor.SiteProcessor
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.context.request.async.DeferredResult
 import rx.Observable
 import rx.Observer
-import javax.servlet.http.HttpServletResponse
 
 @RestController
 class TrendsController @Autowired constructor(val infoComposer: InfoComposer,
@@ -19,7 +17,7 @@ class TrendsController @Autowired constructor(val infoComposer: InfoComposer,
 
     @RequestMapping("/trends/{name}")
     fun getInfo(@PathVariable name: String): DeferredResult<List<SiteInfo>> {
-        val deferred = DeferredResult<List<SiteInfo>>();
+        val deferred = DeferredResult<List<SiteInfo>>()
 
         Observable.merge(siteProcessors.map {
             return@map infoComposer.getAndCompose(it, name)
