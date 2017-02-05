@@ -9,5 +9,5 @@ interface SiteProcessor {
 
     fun urlForName(name: String): String
 
-    fun parseToMovieInfos(html: String, allowedRoles: Set<Role>?): List<MovieInfo>
+    fun parseToMovieInfos(html: String, allowedRoles: Set<Role>?): List<MovieInfo>?
 }

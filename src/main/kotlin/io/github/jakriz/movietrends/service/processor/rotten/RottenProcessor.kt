@@ -15,9 +15,11 @@ class RottenProcessor : SiteProcessor {
 
     override fun urlForName(name: String) = "http://www.rottentomatoes.com/celebrity/$name"
 
-    override fun parseToMovieInfos(html: String, allowedRoles: Set<Role>?): List<MovieInfo> {
-        val elements = Jsoup.parse(html).select("#filmography_box #filmographyTbl")[0].select("tr")
-        val elementsList = elements.toList()
+    override fun parseToMovieInfos(html: String, allowedRoles: Set<Role>?): List<MovieInfo>? {
+        val parsed = Jsoup.parse(html).select("#filmography_box #filmographyTbl")
+        if (parsed.size == 0) return null
+
+        val elementsList = parsed[0].select("tr").toList()
                 .drop(1)
                 .map {
                     val tds = it.select("td")
@@ -43,14 +45,15 @@ class RottenProcessor : SiteProcessor {
 
     private fun rolesFromHtml(element: Element?): Set<Role> {
         if (element != null) {
-            return element.select("li > em")
+            return element.select("li > *")
                     .map {
                         when (it.text()) {
+                            null -> null
                             "Director" -> Role.DIRECTOR
                             "Producer", "Executive Producer" -> Role.PRODUCER
                             "Actor" -> Role.ACTOR
                             "Screenwriter" -> Role.WRITER
-                            else -> null
+                            else -> Role.ACTOR // named roles
                         }
                     }
                     .filterNotNull()

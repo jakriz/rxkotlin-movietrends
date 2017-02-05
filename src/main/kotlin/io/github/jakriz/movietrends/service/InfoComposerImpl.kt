@@ -8,6 +8,7 @@ import io.github.jakriz.movietrends.service.processor.SiteProcessor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import rx.Observable
+import rx.lang.kotlin.filterNotNull
 
 @Service
 class InfoComposerImpl @Autowired constructor(val httpClient: HttpClient,
@@ -16,7 +17,11 @@ class InfoComposerImpl @Autowired constructor(val httpClient: HttpClient,
     override fun getAndCompose(siteProcessor: SiteProcessor, name: String, allowedRoles: Set<Role>?): Observable<SiteInfo> {
         val movieInfoObservable = httpClient.get(siteProcessor.urlForName(name))
                 .map { html ->
-                    siteProcessor.parseToMovieInfos(html, allowedRoles).sortedBy { it.year }
+                    siteProcessor.parseToMovieInfos(html, allowedRoles)
+                }
+                .filterNotNull()
+                .map { movieInfo ->
+                    movieInfo.sortedBy { it.year }
                 }
 
         return Observable.zip(
